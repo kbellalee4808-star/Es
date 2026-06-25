@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Cruceros, por mucho menos · Bella</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #1B3A5C;
+      --gold:  #D4A94A;
+      --ivory: #FAF7F2;
+      --text:  #2C2C2C;
+      --muted: #6B7280;
+      --radius: 16px;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--ivory);
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 20px;
+      gap: 10px;
+    }
+    .lang-bar a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: all 0.2s;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+    }
+    .lang-bar a.active,
+    .lang-bar a:hover {
+      color: var(--gold);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 60px 24px 56px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 8vw, 52px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-kr {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto 6px;
+    }
+    .hero-sub-kr {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 48px 24px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .section + .section {
+      border-top: 1px solid rgba(27,58,92,0.08);
+    }
+
+    .step-num {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .section h2-kr {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .section p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 6px;
+    }
+    .section p.kr {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── PLANS ── */
+    .plans {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .plan-card {
+      background: #fff;
+      border: 1.5px solid rgba(27,58,92,0.12);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .plan-card.premium {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #fffdf5, #fff9e8);
+    }
+    .plan-name {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .plan-price {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .plan-unit {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .activation-note {
+      background: rgba(27,58,92,0.04);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+    .activation-note .kr {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      margin-bottom: 0;
+    }
+
+    /* ── REWARDS TABLE ── */
+    .rewards-table {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(27,58,92,0.1);
+      margin: 20px 0 8px;
+    }
+    .rt-header {
+      background: var(--navy);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 12px 20px;
+      gap: 8px;
+    }
+    .rt-header span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .rt-header .mult {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold);
+      text-align: center;
+    }
+    .rt-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 16px 20px;
+      gap: 8px;
+    }
+    .rt-row + .rt-row {
+      border-top: 1px solid rgba(27,58,92,0.06);
+    }
+    .rt-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .rt-val.receive { color: var(--gold); }
+    .rt-arrow {
+      font-size: 18px;
+      color: rgba(27,58,92,0.2);
+      text-align: center;
+    }
+    .rt-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── CRUISE IMAGE ── */
+    .cruise-img-wrap {
+      position: relative;
+      margin: 32px 0 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .cruise-img-wrap img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .cruise-img-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(27,58,92,0.85));
+      padding: 24px 16px 14px;
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--navy);
+      padding: 52px 24px;
+      text-align: center;
+    }
+    .cta-section p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    .cta-section .kr {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 28px;
+    }
+    .free-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 28px !important;
+    }
+    .btn-primary {
+      display: block;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:active { opacity: 0.85; }
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 15px;
+      text-decoration: none;
+      padding: 15px 24px;
+      border-radius: 50px;
+      min-height: 54px;
+      transition: opacity 0.2s;
+    }
+    .btn-secondary:active { opacity: 0.75; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      padding: 24px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--navy);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+    .footer span { color: var(--gold); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 520px) {
+      .hero { padding: 48px 20px 44px; }
+      .section { padding: 40px 20px; }
+      .plans { gap: 10px; }
+      .plan-price { font-size: 28px; }
+    }
+    @media (max-width: 320px) {
+      .hero h1 { font-size: 28px; }
+      .plans { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<nav class="lang-bar">
+  <a href="#" class="active">ES</a>
+  <a href="https://kbellalee4808-star.github.io/">KR</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Membresía de cruceros · 크루즈 멤버십</p>
+  <h1>Cruceros,<br>por <em>mucho menos</em></h1>
+  <p class="hero-kr">크루즈, 훨씬 저렴하게</p>
+  <p class="hero-sub">Así es como viajo en crucero todo el año. Te explico cómo funciona.</p>
+  <p class="hero-sub-kr">이렇게 일 년 내내 크루즈를 다녀요. 어떻게 되는 건지 알려드릴게요.</p>
+</header>
+
+<!-- INTRO -->
+<section class="section">
+  <p>Uso una <strong>membresía de cruceros</strong> desde hace años. Es más simple de lo que parece:</p>
+  <p class="kr">저는 몇 년째 <strong>크루즈 멤버십</strong>을 쓰고 있어요. 생각보다 훨씬 간단해요:</p>
+</section>
+
+<!-- STEP 01 -->
+<section class="section">
+  <p class="step-num">01</p>
+  <h2>Pagas una suscripción mensual</h2>
+  <span class="h2-kr" style="display:block;font-size:12px;color:#6B7280;margin-bottom:16px;">매달 구독료를 냅니다</span>
+  <p>Eliges el plan que mejor se adapte a ti. Eso es todo lo que pagas.</p>
+  <p class="kr">자신에게 맞는 플랜을 고르면 돼요. 내는 건 그게 전부예요.</p>
+
+  <div class="plans">
+    <div class="plan-card">
+      <p class="plan-name">Classic</p>
+      <p class="plan-price">$100</p>
+      <p class="plan-unit">al mes / 월</p>
+    </div>
+    <div class="plan-card premium">
+      <p class="plan-name">Premium</p>
+      <p class="plan-price">$250</p>
+      <p class="plan-unit">al mes / 월</p>
+    </div>
+  </div>
+
+  <div class="activation-note">
+    Al inscribirte por primera vez hay un <strong>cargo de activación único</strong> (Classic $100 · Premium $250). Después, solo pagas la mensualidad.
+    <p class="kr">최초 가입 시 <strong>1회 활성화비</strong>가 있어요 (클래식 $100 · 프리미엄 $250). 이후엔 월 구독료만 내면 돼요.</p>
+  </div>
+</section>
+
+<!-- STEP 02 -->
+<section class="section">
+  <p class="step-num">02</p>
+  <h2>Ese dinero vuelve a ti — el doble</h2>
+  <span style="display:block;font-size:12px;color:#6B7280;margin-bottom:16px;">그 돈이 2배로 돌아옵니다</span>
+  <p>Mientras pagas a tiempo, cada mes acumulas el doble de lo que pagaste, en recompensas para viajar.</p>
+  <p class="kr">정시에 납부하는 동안, 매달 낸 금액의 2배가 여행용 리워드로 쌓여요.</p>
+
+  <div class="rewards-table">
+    <div class="rt-header">
+      <span>Pagas / 내는 돈</span>
+      <span class="mult">×2</span>
+      <span style="text-align:right;">Recibes / 받는 리워드</span>
+    </div>
+    <div class="rt-row">
+      <div>
+        <div class="rt-val">$100</div>
+        <div class="rt-label">Classic</div>
+      </div>
+      <div class="rt-arrow">→</div>
+      <div style="text-align:right;">
+        <div class="rt-val receive">$200</div>
+        <div class="rt-label" style="text-align:right;">en recompensas</div>
+      </div>
+    </div>
+    <div class="rt-row">
+      <div>
+        <div class="rt-val">$250</div>
+        <div class="rt-label">Premium</div>
+      </div>
+      <div class="rt-arrow">→</div>
+      <div style="text-align:right;">
+        <div class="rt-val receive">$500</div>
+        <div class="rt-label" style="text-align:right;">en recompensas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 03 -->
+<section class="section">
+  <p class="step-num">03</p>
+  <h2>Reservas tus cruceros con esas recompensas</h2>
+  <span style="display:block;font-size:12px;color:#6B7280;margin-bottom:16px;">그 리워드로 크루즈를 예약합니다</span>
+  <p>Puedes reservar cruceros que salgan a partir de 30 días. Y los que parten de 9 meses en adelante, los puedes pagar completamente con tus recompensas. Mantienes la membresía activa hasta el día de embarque y luego puedes terminarla con total libertad. Así el crucero te sale muchísimo más barato que el precio normal.</p>
+  <p class="kr">출발이 30일 이후인 크루즈부터 예약할 수 있어요. 그리고 9개월 이후 출발 상품은 전액 리워드로 결제할 수 있어요. 탑승일까지만 멤버십을 유지하고, 그 후엔 자유롭게 종료하면 돼요. 그래서 크루즈를 정상가보다 훨씬 저렴하게 다닐 수 있어요.</p>
+
+  <div class="cruise-img-wrap">
+    <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=1000&h=600" alt="Crucero en el mar" />
+    <div class="cruise-img-caption">Tu próximo destino ya te está esperando. · 다음 목적지가 이미 당신을 기다리고 있어요.</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p>¿Listos para empezar o tienen alguna pregunta?</p>
+  <p class="kr">시작하고 싶거나 궁금한 게 있으세요?</p>
+  <p class="free-note">✓ Registrarte es gratis · solo pagas si activas tu membresía<br><span style="font-size:11px;color:rgba(255,255,255,0.3);">✓ 가입은 무료 · 멤버십을 활성화할 때만 결제해요</span></p>
+
+  <a href="https://bella1004.incruises.com/signup" class="btn-primary">
+    Crear cuenta gratis 🚢&nbsp;&nbsp;무료로 가입하기 🚢
+  </a>
+  <a href="https://wa.me/821050474808?text=%C2%A1Hola%20Bella!%20Cu%C3%A9ntame%20m%C3%A1s%20sobre%20la%20membres%C3%ADa%20de%20cruceros%20%F0%9F%98%8A" class="btn-secondary">
+    💬 Escríbeme por WhatsApp &nbsp;·&nbsp; 왓츠앱으로 연락하기
+  </a>
+</section>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  Las recompensas y condiciones están sujetas a cambios según las políticas vigentes. No es una promesa de ingresos ni de resultados garantizados.<br>
+  <span style="font-size:10px;color:#aaa;">리워드와 조건은 운영 정책에 따라 달라질 수 있습니다. 수익이나 결과를 보장하는 내용이 아닙니다.</span>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span>Bella</span> · Cruise Nomad
+</footer>
+
+</body>
+</html>
